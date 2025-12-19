@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: bringlare-searxng
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.searxng
+    autoDeploy: false
+    envVars:
+      - key: SEARXNG_BASE_URL
+        value: https://bringlare-searxng.onrender.com
+
+  - type: web
+    name: bringlare-backend-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SEARXNG_BASE_URL
+        value: http://bringlare-searxng:8080
+      - key: ALLOWED_ORIGIN
+        value: https://bringlare-frontend.onrender.com

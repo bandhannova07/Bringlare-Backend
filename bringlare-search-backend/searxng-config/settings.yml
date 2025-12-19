@@ -1,0 +1,90 @@
+use_default_settings: true
+
+general:
+  debug: false
+  instance_name: "Bringlare Search"
+  enable_metrics: false
+
+search:
+  safe_search: 1
+  autocomplete: ""
+  default_lang: "en"
+  ban_time_on_fail: 30
+  max_ban_time_on_fail: 720
+  suspended_times:
+    SearxEngineCaptcha: 604800
+    SearxEngineTooManyRequests: 21600
+    SearxEngineAccessDenied: 172800
+  formats:
+    - json
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "CHANGE_THIS_SUPER_LONG_RANDOM_SECRET"
+  image_proxy: true
+  http_protocol_version: "1.1"
+  method: "POST"
+
+ui:
+  default_theme: simple
+  infinite_scroll: false
+
+# 🔥 CORE NO-BAN ENGINES
+engines:
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    timeout: 3.0
+
+  - name: brave
+    engine: brave
+    shortcut: br
+    timeout: 3.0
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    timeout: 3.0
+
+  - name: mojeek
+    engine: mojeek
+    shortcut: mj
+    timeout: 3.0
+
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+    disabled: true     # enable only if needed
+
+  # ⚠️ SOFT RISK
+  - name: bing
+    engine: bing
+    shortcut: bi
+    disabled: true
+    timeout: 4.0
+
+  # 🚨 HIGH RISK (OFF by default)
+  - name: google
+    engine: google
+    shortcut: go
+    disabled: true
+    timeout: 4.0
+
+enabled_engines:
+  - duckduckgo
+  - brave
+  - qwant
+  - mojeek
+
+outgoing:
+  request_timeout: 3.5
+  max_request_timeout: 6.0
+  pool_connections: 30
+  pool_maxsize: 5
+  retries: 0
+  max_retries: 1
+
+limits:
+  pagination_limit: 15
+  max_search_requests_per_minute: 20
